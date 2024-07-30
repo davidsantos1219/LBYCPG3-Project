@@ -6,6 +6,7 @@ Things left to do in this project:
 - add a add post feature (with an upload file/photo/txt + description and caption)
 - add more settings in the settings page
 - create a messaging function + notifcation ping or notif banner (optional)
+- fix up the profile page so that any changes in username/password/pfp can be saved 
 
 
 walkthrough of program
