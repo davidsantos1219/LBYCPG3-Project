@@ -3,4 +3,5 @@ Things left to do in this project:
 - create a functional search bar for people/friends/posts/messages
 - create a sign up feature in the login page
 - create a functional notification tab
+- add a add post feature (with an upload file/photo/txt + description and caption)
 - add more settings in the settings page
