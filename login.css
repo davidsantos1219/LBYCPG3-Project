@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Code Pro', monospace;
+    background-color: #1e1a2a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #f5f5f5;
+}
+
+.container {
+    text-align: center;
+}
+
+.header {
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    color: white;
+    background-color: #8578BB;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.login-form {
+    background-color: #2a2438;
+    padding: 40px;
+    border-radius: 10px;
+    width: 300px;
+
+   
+}
+
+.login-form h2 {
+    font-size: 1.5em;
+    color: #b19cd9;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #413c58;
+    color: #f5f5f5;
+    font-size: 1em;
+    outline: none;
+    
+}
+
+.login-form input::placeholder {
+    color: #8c8c8c;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons button {
+    width: 45%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    color: #f5f5f5;
+    transition: background-color 0.3s;
+    margin: 5px;
+}
+
+.login {
+    background-color: #6a5acd;
+}
+
+.signup {
+    background-color: #8a2be2;
+}
+
+.buttons button:hover {
+    background-color: #b19cd9;
+}
+
+.buttons button:focus {
+    outline: none;
+}

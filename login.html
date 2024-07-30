@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <title>Login - CodeBuddy</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>&lt CODEBUDDY &gt</h1>
+        </div>
+        <div class="login-form">
+            <h2>Login</h2>
+            <input type="text" id="username" placeholder="Username" onkeypress="checkEnter(event)">
+            <input type="password" id="password" placeholder="Password" onkeypress="checkEnter(event)">
+            <div class="buttons">
+                <button class="login" onclick="login()">Login</button>
+                <button class="signup">Signup</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function checkEnter(event) {
+            if (event.key === 'Enter') {
+                login();
+            }
+        }
+
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            if (username === "" || password === "") {
+                alert("Please enter both username and password.");
+            } else {
+                window.location.href = "Main Page.html"; // Redirect to the main page
+            }
+        }
+    </script>
+</body>
+</html>
