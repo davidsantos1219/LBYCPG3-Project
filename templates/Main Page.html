@@ -38,10 +38,12 @@
             </div>
             <div class="nav-bar">
                 <ul>
-                    <li class="home"><a href="profile.html"><i class="fas fa-home"></i> Profile</a></li>
-                    <li class="notifications"><a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li class=""><a href="{{ url_for('profile') }}"><i class="fas fa-home"></i> Profile</a></li>
+
+                    <li class="notifications"><a href="{{ url_for('notifications') }}"><i class="fas fa-bell"></i> Notifications</a></li>
                     <li class="messages"><a href="#Messages" onclick="toggleMessages()"><i class="fas fa-envelope"></i> Messages</a></li>
-                    <li class="settings"><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                    <li class="settings"><a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a></li>
+                    
                 </ul>
             </div>
         </div>

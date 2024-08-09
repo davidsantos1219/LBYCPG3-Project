@@ -10,15 +10,24 @@ def init_sqlite_db():
     conn.close()
 
 @app.route('/')
-def home():
+def index():
     return render_template('Main Page.html')
 
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
-init_sqlite_db()
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 
-@app.route('/')
-def index():
-    return redirect(url_for('signup'))
+@app.route('/notifications')
+def notifications():
+    return render_template('notifications.html')
+
+@app.route('/settings')
+def settings():
+    return render_template('settings.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -38,4 +47,5 @@ def signup():
     return render_template('signup.html')
 
 if __name__ == '__main__':
+    init_sqlite_db()  # Initialize the database before running the app
     app.run(debug=True)
