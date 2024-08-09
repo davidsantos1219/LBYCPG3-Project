@@ -1,0 +1,299 @@
+<!-- TEST COMMIT -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Main Menu.css') }}">
+    <script src="https://kit.fontawesome.com/bed49f6fc4.js" crossorigin="anonymous"></script>
+    <title>Main Page</title>
+</head>
+<body>
+    <div class="top-banner">
+        <h1>&lt CODEBUDDY &gt</h1>
+        <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Search for people, posts, and projects">
+        </div>
+        <div class="banner_profile">
+            <button class="create" id="createPostBtn">CREATE</button>
+            <div class="banner_profile_picture">
+                <img id="bannerProfilePic" src="{{ url_for('static', filename='images/{{ url_for('static', filename='images/samplepfp.png') }}') }}" alt="profile_pic">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="sidebar">
+            <div class="account_profile">
+                <div class="account_details">
+                    <div class="profile_picture">
+                        <img id="sidebarProfilePic" src="{{ url_for('static', filename='images/{{ url_for('static', filename='images/samplepfp.png') }}') }}" alt="profile_pic">
+                    </div>
+                    <div class="text_details">
+                        <p class="bold" id="displayName">NAAMREO</p>
+                        <p class="regular" id="displayUsername">@USERNAME</p>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-bar">
+                <ul>
+                    <li class="home"><a href="profile.html"><i class="fas fa-home"></i> Profile</a></li>
+                    <li class="notifications"><a href="notifications.html"><i class="fas fa-bell"></i> Notifications</a></li>
+                    <li class="messages"><a href="#Messages" onclick="toggleMessages()"><i class="fas fa-envelope"></i> Messages</a></li>
+                    <li class="settings"><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-content" id="postContainer">
+            <div class="share">
+                <img id="shareProfilePic" src="{{ url_for('static', filename='images/{{ url_for('static', filename='images/samplepfp.png') }}') }}" alt="profile_pic" class="share_profile_pic">
+                <div class="share_content">
+                    <input type="text" class="share-input" placeholder="Got something to share?">
+                    <button class="post-button">POST</button>
+                </div>
+            </div>
+
+            <!-- Original Sample Post -->
+            <div class="post">
+                <div class="post-header">
+                    <div class="post-profile-pic">
+                        <img src="{{ url_for('static', filename='images/{{ url_for('static', filename='images/samplepfp.png') }}') }}" alt="profile_pic">
+                    </div>
+                    <div class="post-user-details">
+                        <p class="post-username">DENNY</p>
+                        <p class="post-userhandle">@USERNAME</p>
+                    </div>
+                </div>
+                <div class="post-body">
+                    <p>Check out this code!</p>
+                    <img src="{{ url_for('static', filename='images/samplepost.png') }}" alt="Code Image">
+                </div>
+            </div>
+            <!-- End of Original Sample Post -->
+
+        </div>
+
+        <div class="messages_list hidden" id="messagesList">
+            <div class="messages-header">
+                <p>Messages</p>
+            </div>
+            <div class="messages-search">
+                <input type="text" placeholder="Search Messages">
+            </div>
+            <div class="message-list">
+                <div class="message">
+                    <div class="message-profile-pic">
+                        <img src="{{ url_for('static', filename='images/{{ url_for('static', filename='images/samplepfp.png') }}') }}" alt="profile_pic">
+                    </div>
+                    <div class="message-details">
+                        <p class="message-username">DENNY</p>
+                        <p class="message-userhandle">@USERNAME</p>
+                        <p class="message-content">Hello</p>
+                    </div>
+                </div>
+                <div class="message">
+                    <div class="message-profile-pic">
+                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
+                    </div>
+                    <div class="message-details">
+                        <p class="message-username">ALLIE</p>
+                        <p class="message-userhandle">@USERNAME</p>
+                        <p class="message-content">Let me check it out.</p>
+                    </div>
+                </div>
+                <div class="message">
+                    <div class="message-profile-pic">
+                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
+                    </div>
+                    <div class="message-details">
+                        <p class="message-username">SAND</p>
+                        <p class="message-userhandle">@USERNAME</p>
+                        <p class="message-content">3 new messages</p>
+                    </div>
+                </div>
+                <div class="message">
+                    <div class="message-profile-pic">
+                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
+                    </div>
+                    <div class="message-details">
+                        <p class="message-username">RAY</p>
+                        <p class="message-userhandle">@USERNAME</p>
+                        <p class="message-content">I don't think so</p>
+                    </div>
+                </div>
+                <div class="message">
+                    <div class="message-profile-pic">
+                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
+                    </div>
+                    <div class="message-details">
+                        <p class="message-username">KHAO</p>
+                        <p class="message-userhandle">@USERNAME</p>
+                        <p class="message-content">LoL. I'm with First.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Modal for Creating a Post -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Create a New Post</h2>
+            <form id="postForm">
+                <input type="file" id="postImage" accept="image/*" required><br><br>
+                <textarea id="postText" placeholder="What's on your mind?" required></textarea><br><br>
+                <button type="submit" class="post-button">Post</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleMessages() {
+            var messagesList = document.getElementById('messagesList');
+            if (messagesList.classList.contains('visible')) {
+                messagesList.classList.remove('visible');
+            } else {
+                messagesList.classList.add('visible');
+            }
+        }
+
+        function loadSettings() {
+            // Load dark mode setting
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+            }
+
+            // Load profile picture, username, and name
+            var profilePic = localStorage.getItem('profilePic');
+            var username = localStorage.getItem('username');
+            var name = localStorage.getItem('name');
+
+            if (profilePic) {
+                document.getElementById('bannerProfilePic').src = profilePic;
+                document.getElementById('sidebarProfilePic').src = profilePic;
+                document.getElementById('shareProfilePic').src = profilePic;
+            }
+            if (username) {
+                document.getElementById('displayUsername').innerText = username;
+            }
+            if (name) {
+                document.getElementById('displayName').innerText = name;
+            }
+        }
+
+        window.onload = function() {
+            loadSettings();
+        };
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById("postModal");
+            const createBtn = document.getElementById("createPostBtn");
+            const postBtn = document.querySelector(".post-button"); // Selecting the POST button
+            const span = document.getElementsByClassName("close")[0];
+            const form = document.getElementById("postForm");
+            const postContainer = document.getElementById("postContainer");
+            const shareInput = document.querySelector(".share-input"); // Selecting the share input field
+            const postTextArea = document.getElementById("postText"); // Selecting the modal textarea
+        
+            // Function to open the modal
+            const openModal = function() {
+                // Set the text from shareInput to the modal textarea
+                postTextArea.value = shareInput.value;
+                modal.style.display = "flex";
+            };
+        
+            // Show the modal when either button is clicked
+            createBtn.onclick = openModal;
+            postBtn.onclick = openModal;
+        
+            // Close the modal when the 'x' is clicked
+            span.onclick = function() {
+                modal.style.display = "none";
+            }
+        
+            // Close the modal when clicking outside the modal content
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        
+            // Handle form submission
+            form.onsubmit = function(event) {
+                event.preventDefault();
+        
+                const postText = document.getElementById("postText").value;
+                const postImage = document.getElementById("postImage").files[0];
+                const reader = new FileReader();
+        
+                reader.onload = function(e) {
+                    // Create a new post element in the same format as the original sample post
+                    const post = document.createElement("div");
+                    post.className = "post";
+        
+                    const postHeader = document.createElement("div");
+                    postHeader.className = "post-header";
+        
+                    const postProfilePic = document.createElement("div");
+                    postProfilePic.className = "post-profile-pic";
+        
+                    const imgElement = document.createElement("img");
+                    imgElement.src = "{{ url_for('static', filename='images/samplepfp.png') }}"; // Keeping the sample profile picture
+                    imgElement.alt = "profile_pic";
+        
+                    const postUserDetails = document.createElement("div");
+                    postUserDetails.className = "post-user-details";
+        
+                    const postUsername = document.createElement("p");
+                    postUsername.className = "post-username";
+                    postUsername.textContent = "DENNY"; // Example username
+        
+                    const postUserhandle = document.createElement("p");
+                    postUserhandle.className = "post-userhandle";
+                    postUserhandle.textContent = "@USERNAME"; // Example user handle
+        
+                    const postBody = document.createElement("div");
+                    postBody.className = "post-body";
+        
+                    const textElement = document.createElement("p");
+                    textElement.textContent = postText;
+        
+                    const imgPostElement = document.createElement("img");
+                    imgPostElement.src = e.target.result;
+                    imgPostElement.alt = "Post Image";
+        
+                    postProfilePic.appendChild(imgElement);
+                    postUserDetails.appendChild(postUsername);
+                    postUserDetails.appendChild(postUserhandle);
+                    postHeader.appendChild(postProfilePic);
+                    postHeader.appendChild(postUserDetails);
+                    postBody.appendChild(textElement);
+                    postBody.appendChild(imgPostElement);
+                    post.appendChild(postHeader);
+                    post.appendChild(postBody);
+        
+                    // Insert the new post after the share area
+                    const shareArea = document.querySelector('.share');
+                    shareArea.insertAdjacentElement('afterend', post);
+        
+                    // Clear the form, clear the share input, and close the modal
+                    form.reset();
+                    shareInput.value = ""; // Clear the share input field
+                    modal.style.display = "none";
+                }
+        
+                if (postImage) {
+                    reader.readAsDataURL(postImage);
+                }
+            }
+        });
+        
+
+        
+    </script>
+    
+</body>
+</html>
