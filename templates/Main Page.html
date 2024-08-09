@@ -19,7 +19,7 @@
         <div class="banner_profile">
             <button class="create" id="createPostBtn">CREATE</button>
             <div class="banner_profile_picture">
-                <img id="bannerProfilePic" src="{{ url_for('static', filename='images/{{ url_for('static', filename='images/samplepfp.png') }}') }}" alt="profile_pic">
+                <img id="bannerProfilePic" src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
             </div>
         </div>
     </div>
@@ -28,7 +28,7 @@
             <div class="account_profile">
                 <div class="account_details">
                     <div class="profile_picture">
-                        <img id="sidebarProfilePic" src="{{ url_for('static', filename='images/{{ url_for('static', filename='images/samplepfp.png') }}') }}" alt="profile_pic">
+                        <img id="sidebarProfilePic" src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
                     </div>
                     <div class="text_details">
                         <p class="bold" id="displayName">NAAMREO</p>
@@ -47,7 +47,7 @@
         </div>
         <div class="main-content" id="postContainer">
             <div class="share">
-                <img id="shareProfilePic" src="{{ url_for('static', filename='images/{{ url_for('static', filename='images/samplepfp.png') }}') }}" alt="profile_pic" class="share_profile_pic">
+                <img id="shareProfilePic" src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic" class="share_profile_pic">
                 <div class="share_content">
                     <input type="text" class="share-input" placeholder="Got something to share?">
                     <button class="post-button">POST</button>
@@ -58,7 +58,7 @@
             <div class="post">
                 <div class="post-header">
                     <div class="post-profile-pic">
-                        <img src="{{ url_for('static', filename='images/{{ url_for('static', filename='images/samplepfp.png') }}') }}" alt="profile_pic">
+                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
                     </div>
                     <div class="post-user-details">
                         <p class="post-username">DENNY</p>
@@ -84,7 +84,7 @@
             <div class="message-list">
                 <div class="message">
                     <div class="message-profile-pic">
-                        <img src="{{ url_for('static', filename='images/{{ url_for('static', filename='images/samplepfp.png') }}') }}" alt="profile_pic">
+                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
                     </div>
                     <div class="message-details">
                         <p class="message-username">DENNY</p>
@@ -241,7 +241,7 @@
                     postProfilePic.className = "post-profile-pic";
         
                     const imgElement = document.createElement("img");
-                    imgElement.src = "{{ url_for('static', filename='images/samplepfp.png') }}"; // Keeping the sample profile picture
+                    imgElement.src = "{{ url_for('static', filename='images/samplepfp.png') }}"; // Correct path to the profile picture
                     imgElement.alt = "profile_pic";
         
                     const postUserDetails = document.createElement("div");
