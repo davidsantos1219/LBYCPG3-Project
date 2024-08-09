@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
 import base64
 
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'  # Necessary for session management
 
 # Initialize the database
 def init_sqlite_db():
@@ -13,6 +14,9 @@ def init_sqlite_db():
 
 @app.route('/')
 def index():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    
     conn = sqlite3.connect('db.sqlite3')
     cursor = conn.cursor()
     cursor.execute('SELECT text, image FROM posts')
@@ -22,23 +26,46 @@ def index():
     # Convert the binary image data to base64 to display in the browser
     posts = [(text, base64.b64encode(image).decode('utf-8') if image else None) for text, image in posts]
 
-    return render_template('Main page.html', posts=posts)
+    return render_template('Main Page.html', posts=posts, username=session['username'])
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Validate user credentials
+        conn = sqlite3.connect('db.sqlite3')
+        cursor = conn.cursor()
+        cursor.execute('SELECT * FROM users WHERE username = ? AND password = ?', (username, password))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user:
+            session['username'] = username  # Store username in session
+            return redirect(url_for('index'))
+        else:
+            return "Invalid credentials! Please try again."
+
     return render_template('login.html')
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('profile.html', username=session['username'])
 
 @app.route('/notifications')
 def notifications():
-    return render_template('notifications.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('notifications.html', username=session['username'])
 
 @app.route('/settings')
 def settings():
-    return render_template('settings.html')
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    return render_template('settings.html', username=session['username'])
 
 @app.route('/startPage')
 def startPage():
@@ -62,9 +89,11 @@ def signup():
 
     return render_template('signup.html')
 
-
 @app.route('/add_post', methods=['POST'])
 def add_post():
+    if 'username' not in session:
+        return redirect(url_for('login'))
+
     text = request.form['text']
     image = request.files['image'].read() if 'image' in request.files else None
 

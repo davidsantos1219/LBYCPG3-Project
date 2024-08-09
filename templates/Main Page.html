@@ -31,8 +31,8 @@
                         <img id="sidebarProfilePic" src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
                     </div>
                     <div class="text_details">
-                        <p class="bold" id="displayName">NAAMREO</p>
-                        <p class="regular" id="displayUsername">@USERNAME</p>
+                        <p class="bold" id="displayName">{{ username }}</p>
+                        <p class="regular" id="displayUsername">@{{ username }}</p>
                     </div>
                 </div>
             </div>
@@ -88,12 +88,6 @@
                 <a class="menu-item" href="{{ url_for('settings') }}">
                     <span><i class="fas fa-cog"></i></span><h3>Settings</h3>
                 </a>
-                <!--<ul>
-                    <li class=""><a href="{{ url_for('profile') }}"><i class="fas fa-home"></i> Profile</a></li>
-                    <li class="notifications"><a href="{{ url_for('notifications') }}"><i class="fas fa-bell"></i> Notifications</a></li>
-                    <li class="messages"><a href="#Messages" onclick="toggleMessages()"><i class="fas fa-envelope"></i> Messages</a></li>
-                    <li class="settings"><a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a></li>
-                </ul>-->
             </div>
         </div>
         <!-- Main page -->
@@ -114,8 +108,8 @@
                         <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
                     </div>
                     <div class="post-user-details">
-                        <p class="post-username">DENNY</p>
-                        <p class="post-userhandle">@USERNAME</p>
+                        <p class="post-username">{{ username }}</p>
+                        <p class="post-userhandle">@{{ username }}</p>
                     </div>
                 </div>
                 <div class="post-body">
@@ -127,27 +121,7 @@
             </div>
             {% endfor %}
         </div>
-        <!--<div class="messages_list hidden" id="messagesList">
-            <div class="messages-header">
-                <p>Messages</p>
-            </div>
-            <div class="messages-search">
-                <input type="text" placeholder="Search Messages">
-            </div>
-            <div class="message-list">
-                <div class="message">
-                    <div class="message-profile-pic">
-                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
-                    </div>
-                    <div class="message-details">
-                        <p class="message-username">DENNY</p>
-                        <p class="message-userhandle">@USERNAME</p>
-                        <p class="message-content">Hello</p>
-                    </div>
-                </div>
 
-            </div>
-        </div>-->
         <!-- RIGHT SIDE-->
         <div class="right" id="messagesList">
             <div class="messages">
@@ -289,7 +263,7 @@
 
             // Load profile picture, username, and name
             var profilePic = localStorage.getItem('profilePic');
-            var username = localStorage.getItem('username');
+            var username = "{{ username }}";
             var name = localStorage.getItem('name');
 
             if (profilePic) {

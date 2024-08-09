@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
-    <link rel="stylesheet" href="login.css">
     <title>Login - CodeBuddy</title>
 </head>
 <body>
@@ -14,32 +13,17 @@
         </div>
         <div class="login-form">
             <h2>Login</h2>
-            <input type="text" id="username" placeholder="Username" onkeypress="checkEnter(event)">
-            <input type="password" id="password" placeholder="Password" onkeypress="checkEnter(event)">
-            <div class="buttons">
-                <button class="login" onclick="login()">Login</button>
-                <button class="signup" onclick="signup()">Signup</button>
-            </div>
+            <form action="{{ url_for('login') }}" method="POST">
+                <input type="text" name="username" id="username" placeholder="Username" required>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <div class="buttons">
+                    <button type="submit" class="login">Login</button>
+                    <button type="button" class="signup" onclick="signup()">Signup</button>
+                </div>
+            </form>
         </div>
     </div>
     <script>
-        function checkEnter(event) {
-            if (event.key === 'Enter') {
-                login();
-            }
-        }
-
-        function login() {
-            var username = document.getElementById('username').value;
-            var password = document.getElementById('password').value;
-
-            if (username === "" || password === "") {
-                alert("Please enter both username and password.");
-            } else {
-                window.location.href = "{{ url_for('index') }}"; // Redirect to the main page
-            }
-        }
-        
         function signup() {
             window.location.href = "{{ url_for('signup') }}";
         }
