@@ -1,5 +1,3 @@
-<!-- TEST COMMIT -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,24 +37,24 @@
             <div class="nav-bar">
                 <ul>
                     <li class=""><a href="{{ url_for('profile') }}"><i class="fas fa-home"></i> Profile</a></li>
-
                     <li class="notifications"><a href="{{ url_for('notifications') }}"><i class="fas fa-bell"></i> Notifications</a></li>
                     <li class="messages"><a href="#Messages" onclick="toggleMessages()"><i class="fas fa-envelope"></i> Messages</a></li>
                     <li class="settings"><a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a></li>
-                    
                 </ul>
             </div>
         </div>
+
         <div class="main-content" id="postContainer">
             <div class="share">
                 <img id="shareProfilePic" src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic" class="share_profile_pic">
                 <div class="share_content">
-                    <input type="text" class="share-input" placeholder="Got something to share?">
-                    <button class="post-button">POST</button>
+                    <input type="text" class="share-input" placeholder="Got something to share?" id="tempPostText">
+                    <button class="post-button" id="openPostModal">POST</button>
                 </div>
             </div>
 
-            <!-- Original Sample Post -->
+            <!-- Render posts dynamically from the database -->
+            {% for text, image in posts %}
             <div class="post">
                 <div class="post-header">
                     <div class="post-profile-pic">
@@ -68,12 +66,13 @@
                     </div>
                 </div>
                 <div class="post-body">
-                    <p>Check out this code!</p>
-                    <img src="{{ url_for('static', filename='images/samplepost.png') }}" alt="Code Image">
+                    <p>{{ text }}</p>
+                    {% if image %}
+                    <img src="data:image/png;base64,{{ image }}" alt="Post Image">
+                    {% endif %}
                 </div>
             </div>
-            <!-- End of Original Sample Post -->
-
+            {% endfor %}
         </div>
 
         <div class="messages_list hidden" id="messagesList">
@@ -94,46 +93,7 @@
                         <p class="message-content">Hello</p>
                     </div>
                 </div>
-                <div class="message">
-                    <div class="message-profile-pic">
-                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
-                    </div>
-                    <div class="message-details">
-                        <p class="message-username">ALLIE</p>
-                        <p class="message-userhandle">@USERNAME</p>
-                        <p class="message-content">Let me check it out.</p>
-                    </div>
-                </div>
-                <div class="message">
-                    <div class="message-profile-pic">
-                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
-                    </div>
-                    <div class="message-details">
-                        <p class="message-username">SAND</p>
-                        <p class="message-userhandle">@USERNAME</p>
-                        <p class="message-content">3 new messages</p>
-                    </div>
-                </div>
-                <div class="message">
-                    <div class="message-profile-pic">
-                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
-                    </div>
-                    <div class="message-details">
-                        <p class="message-username">RAY</p>
-                        <p class="message-userhandle">@USERNAME</p>
-                        <p class="message-content">I don't think so</p>
-                    </div>
-                </div>
-                <div class="message">
-                    <div class="message-profile-pic">
-                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
-                    </div>
-                    <div class="message-details">
-                        <p class="message-username">KHAO</p>
-                        <p class="message-userhandle">@USERNAME</p>
-                        <p class="message-content">LoL. I'm with First.</p>
-                    </div>
-                </div>
+                <!-- More messages -->
             </div>
         </div>
     </div>
@@ -143,9 +103,9 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Create a New Post</h2>
-            <form id="postForm">
-                <input type="file" id="postImage" accept="image/*" required><br><br>
-                <textarea id="postText" placeholder="What's on your mind?" required></textarea><br><br>
+            <form id="postForm" action="{{ url_for('add_post') }}" method="POST" enctype="multipart/form-data">
+                <textarea id="postText" name="text" placeholder="What's on your mind?" required></textarea><br><br>
+                <input type="file" id="postImage" name="image" accept="image/*" required><br><br>
                 <button type="submit" class="post-button">Post</button>
             </form>
         </div>
@@ -189,113 +149,31 @@
             loadSettings();
         };
 
-
         document.addEventListener('DOMContentLoaded', () => {
             const modal = document.getElementById("postModal");
-            const createBtn = document.getElementById("createPostBtn");
-            const postBtn = document.querySelector(".post-button"); // Selecting the POST button
+            const openPostModalBtn = document.getElementById("openPostModal");
             const span = document.getElementsByClassName("close")[0];
-            const form = document.getElementById("postForm");
-            const postContainer = document.getElementById("postContainer");
-            const shareInput = document.querySelector(".share-input"); // Selecting the share input field
-            const postTextArea = document.getElementById("postText"); // Selecting the modal textarea
-        
-            // Function to open the modal
-            const openModal = function() {
-                // Set the text from shareInput to the modal textarea
-                postTextArea.value = shareInput.value;
+            const postTextArea = document.getElementById("postText");
+            const tempPostText = document.getElementById("tempPostText");
+
+            // Open modal when "POST" button is clicked
+            openPostModalBtn.onclick = function() {
+                postTextArea.value = tempPostText.value;
                 modal.style.display = "flex";
             };
-        
-            // Show the modal when either button is clicked
-            createBtn.onclick = openModal;
-            postBtn.onclick = openModal;
-        
+
             // Close the modal when the 'x' is clicked
             span.onclick = function() {
                 modal.style.display = "none";
-            }
-        
+            };
+
             // Close the modal when clicking outside the modal content
             window.onclick = function(event) {
                 if (event.target == modal) {
                     modal.style.display = "none";
                 }
-            }
-        
-            // Handle form submission
-            form.onsubmit = function(event) {
-                event.preventDefault();
-        
-                const postText = document.getElementById("postText").value;
-                const postImage = document.getElementById("postImage").files[0];
-                const reader = new FileReader();
-        
-                reader.onload = function(e) {
-                    // Create a new post element in the same format as the original sample post
-                    const post = document.createElement("div");
-                    post.className = "post";
-        
-                    const postHeader = document.createElement("div");
-                    postHeader.className = "post-header";
-        
-                    const postProfilePic = document.createElement("div");
-                    postProfilePic.className = "post-profile-pic";
-        
-                    const imgElement = document.createElement("img");
-                    imgElement.src = "{{ url_for('static', filename='images/samplepfp.png') }}"; // Correct path to the profile picture
-                    imgElement.alt = "profile_pic";
-        
-                    const postUserDetails = document.createElement("div");
-                    postUserDetails.className = "post-user-details";
-        
-                    const postUsername = document.createElement("p");
-                    postUsername.className = "post-username";
-                    postUsername.textContent = "DENNY"; // Example username
-        
-                    const postUserhandle = document.createElement("p");
-                    postUserhandle.className = "post-userhandle";
-                    postUserhandle.textContent = "@USERNAME"; // Example user handle
-        
-                    const postBody = document.createElement("div");
-                    postBody.className = "post-body";
-        
-                    const textElement = document.createElement("p");
-                    textElement.textContent = postText;
-        
-                    const imgPostElement = document.createElement("img");
-                    imgPostElement.src = e.target.result;
-                    imgPostElement.alt = "Post Image";
-        
-                    postProfilePic.appendChild(imgElement);
-                    postUserDetails.appendChild(postUsername);
-                    postUserDetails.appendChild(postUserhandle);
-                    postHeader.appendChild(postProfilePic);
-                    postHeader.appendChild(postUserDetails);
-                    postBody.appendChild(textElement);
-                    postBody.appendChild(imgPostElement);
-                    post.appendChild(postHeader);
-                    post.appendChild(postBody);
-        
-                    // Insert the new post after the share area
-                    const shareArea = document.querySelector('.share');
-                    shareArea.insertAdjacentElement('afterend', post);
-        
-                    // Clear the form, clear the share input, and close the modal
-                    form.reset();
-                    shareInput.value = ""; // Clear the share input field
-                    modal.style.display = "none";
-                }
-        
-                if (postImage) {
-                    reader.readAsDataURL(postImage);
-                }
-            }
+            };
         });
-        
-
-        
     </script>
-    
 </body>
 </html>
