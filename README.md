@@ -1,3 +1,4 @@
+
 Things left to do in this project:
 - create a database/place to store username/password/profilepics/posts/messages/friends list etc.
 - create a functional search bar for people/friends/posts/messages/topics
