@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="notifications.css">
+    <title>Notifications</title>
+</head>
+<body>
+    <div class="top-banner">
+        <h1>&lt NOTIFICATIONS &gt</h1>
+        <button onclick="goBack()"><< BACK</button>
+    </div>
+    <div class="container">
+        <div class="notifications-content">
+            <h2>Notifications Page Content</h2>
+            <!-- Add notifications content here -->
+        </div>
+    </div>
+    <script>
+        function loadSettings() {
+            // Load dark mode setting
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+            }
+        }
+
+        function goBack() {
+            document.body.classList.add('page-transition');
+            setTimeout(() => {
+                window.location.href = 'Main Page.html';
+            }, 500);
+        }
+
+        document.body.classList.add('page-transition');
+        setTimeout(() => {
+            document.body.classList.remove('page-transition');
+        }, 500);
+
+        // Ensure settings are loaded when the page is ready
+        window.onload = function() {
+            loadSettings();
+        };
+    </script>
+</body>
+</html>
