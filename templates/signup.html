@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='Main Menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
 <body>
-    <div class="top-banner">
-        <h1>&lt CODEBUDDY &gt</h1>
-    </div>
-
+    <div class="container">
+        <div class="header">
+            <h1>&lt CODEBUDDY &gt</h1>
+        </div>
     <div class="container" style="justify-content: center;">
         <div class="signup-form login-form">
             <h2>Create an Account</h2>
@@ -18,7 +18,9 @@
                 <input type="text" name="username" placeholder="Username" required><br>
                 <input type="email" name="email" placeholder="Email" required><br>
                 <input type="password" name="password" placeholder="Password" required><br>
-                <button type="submit" class="post-button">Sign Up</button>
+                <div class="buttons">
+                <button type="submit" class="signup" >Sign Up</button>
+                </div>
             </form>
         </div>
     </div>
