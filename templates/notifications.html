@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="notifications.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='notifications.css') }}">
     <title>Notifications</title>
 </head>
 <body>
@@ -28,7 +28,7 @@
         function goBack() {
             document.body.classList.add('page-transition');
             setTimeout(() => {
-                window.location.href = 'Main Page.html';
+                window.location.href = "{{ url_for('index') }}";  // Correctly navigate to the home page
             }, 500);
         }
 

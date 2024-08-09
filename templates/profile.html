@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
     <title>Profile</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
     <div class="container">
         <div class="profile-content">
             <div class="profile-picture">
-                <img id="profilePic" src="samplepfp.png" alt="Profile Picture">
+                <img id="profilePic" src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="Profile Picture">
                 <input type="file" id="uploadPic" accept="image/*" onchange="previewImage(event)">
                 <label for="uploadPic" class="upload-button">Change Picture</label>
             </div>
@@ -35,7 +35,7 @@
         function goBack() {
             document.body.classList.add('page-transition');
             setTimeout(() => {
-                window.location.href = 'Main Page.html';
+                window.location.href = "{{ url_for('index') }}";  // Correctly navigate to the home page
             }, 500);
         }
 
