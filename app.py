@@ -22,7 +22,7 @@ def index():
     # Convert the binary image data to base64 to display in the browser
     posts = [(text, base64.b64encode(image).decode('utf-8') if image else None) for text, image in posts]
 
-    return render_template('Main Page.html', posts=posts)
+    return render_template('Main page.html', posts=posts)
 
 @app.route('/login')
 def login():
@@ -39,6 +39,10 @@ def notifications():
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
+
+@app.route('/startPage')
+def startPage():
+    return render_template('startPage.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():

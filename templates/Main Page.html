@@ -36,12 +36,63 @@
                 </div>
             </div>
             <div class="nav-bar">
-                <ul>
+                <a class="menu-item" href="{{ url_for('profile') }}">
+                    <span><i class="fas fa-home"></i></span><h3>Profile</h3>
+                </a>
+                <a class="menu-item" id="notifications">
+                    <span><i class="fas fa-bell"><small class="notification-count">3+</small></i></span><h3>Notifications</h3>
+                    <!--Notification pop-up-->
+                    <div class="notifications-popup">
+                        <div>
+                            <div class="message-profile-pic">
+                                <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="">
+                            </div>
+                            <div class="notification-body">
+                                <b>Miguel</b> accepted your friend request
+                                <small class="text-muted">1 HOUR AGO</small>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="message-profile-pic">
+                                <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="">
+                            </div>
+                            <div class="notification-body">
+                                <b>Diana</b> commented on your post
+                                <small class="text-muted">3 HOURS AGO</small>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="message-profile-pic">
+                                <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="">
+                            </div>
+                            <div class="notification-body">
+                                <b>Bleaux</b> liked your post
+                                <small class="text-muted">4 HOURS AGO</small>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="message-profile-pic">
+                                <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="">
+                            </div>
+                            <div class="notification-body">
+                                <b>David</b> accepted your friend request
+                                <small class="text-muted">2 DAYS AGO</small>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a class="menu-item" id="messages-notification">
+                    <span><i class="fas fa-envelope" ><small class="notification-count">3+</small></i></span><h3>Messages</h3>
+                </a>
+                <a class="menu-item" href="{{ url_for('settings') }}">
+                    <span><i class="fas fa-cog"></i></span><h3>Settings</h3>
+                </a>
+                <!--<ul>
                     <li class=""><a href="{{ url_for('profile') }}"><i class="fas fa-home"></i> Profile</a></li>
                     <li class="notifications"><a href="{{ url_for('notifications') }}"><i class="fas fa-bell"></i> Notifications</a></li>
                     <li class="messages"><a href="#Messages" onclick="toggleMessages()"><i class="fas fa-envelope"></i> Messages</a></li>
                     <li class="settings"><a href="{{ url_for('settings') }}"><i class="fas fa-cog"></i> Settings</a></li>
-                </ul>
+                </ul>-->
             </div>
         </div>
         <!-- Main page -->
@@ -75,8 +126,7 @@
             </div>
             {% endfor %}
         </div>
-
-        <div class="messages_list hidden" id="messagesList">
+        <!--<div class="messages_list hidden" id="messagesList">
             <div class="messages-header">
                 <p>Messages</p>
             </div>
@@ -94,8 +144,116 @@
                         <p class="message-content">Hello</p>
                     </div>
                 </div>
-                <!-- More messages -->
+
             </div>
+        </div>-->
+        <!-- RIGHT SIDE-->
+        <div class="right" id="messagesList">
+            <div class="messages">
+                <div class="heading">
+                    <p>Messages</p> <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </div>
+                <!-- Search Bar-->
+                 <div class="search-message">
+                    <i class="fa fa-search"></i>
+                    <input type="search" placeholder="Search Messages" id="message-search">
+                 </div>
+                <!-- Messages category-->
+                 <div class="category">
+                    <h6 class="active">Primary</h6>
+                 </div>
+                <!-- Messages -->
+                 <div class="message">
+                    <div class="message-profile-pic">
+                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
+                        <div class="active"></div>
+                    </div>
+                    <div class="message-body">
+                        <h5>Miguel</h5>
+                        <p class="text-muted">Just woke up</p>
+                    </div>
+                 </div>
+                 <!-- Messages -->
+                 <div class="message">
+                    <div class="message-profile-pic">
+                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
+                    </div>
+                    <div class="message-body">
+                        <h5>Diana</h5>
+                        <p class="text-muted">EYYYYYYY</p>
+                    </div>
+                 </div>
+                 <!-- Messages -->
+                 <div class="message">
+                    <div class="message-profile-pic">
+                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
+                        <div class="active"></div>
+                    </div>
+                    <div class="message-body">
+                        <h5>Bleaux</h5>
+                        <p class="text-muted">Wassup</p>
+                    </div>
+                 </div>
+                 <!-- Messages -->
+                 <div class="message">
+                    <div class="message-profile-pic">
+                        <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
+                        <div class="active"></div>
+                    </div>
+                    <div class="message-body">
+                        <h5>David</h5>
+                        <p class="text-muted">Tara 1 g?</p>
+                    </div>
+                 </div>
+            </div>
+            <!-- End of Messages-->
+
+            <!-- Friend Requests-->
+             <div class="friend-requests">
+                <h4>Requests</h4>
+                <div class="request">
+                    <div class="info">
+                        <div class="message-profile-pic">
+                            <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
+                        </div>
+                        <div>
+                            <h5>Komz</h5>
+                            <p class="text-muted">
+                                5 mutual friends
+                            </p>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <button class="btn btn-primary">
+                            Accept
+                        </button>
+                        <button class="btn">
+                            Decline
+                        </button>
+                    </div>
+                </div>
+                <div class="request">
+                    <div class="info">
+                        <div class="message-profile-pic">
+                            <img src="{{ url_for('static', filename='images/samplepfp.png') }}" alt="profile_pic">
+                        </div>
+                        <div>
+                            <h5>Celery</h5>
+                            <p class="text-muted">
+                                2 mutual friends
+                            </p>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <button class="btn btn-primary">
+                            Accept
+                        </button>
+                        <button class="btn">
+                            Decline
+                        </button>
+                    </div>
+                </div>
+             </div>
         </div>
     </div>
 
@@ -176,5 +334,9 @@
             };
         });
     </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
 </body>
 </html>

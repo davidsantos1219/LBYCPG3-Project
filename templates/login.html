@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
-    {% comment %} <link rel="stylesheet" href="login.css"> {% endcomment %}
+    <link rel="stylesheet" href="login.css">
     <title>Login - CodeBuddy</title>
 </head>
 <body>
@@ -18,7 +18,7 @@
             <input type="password" id="password" placeholder="Password" onkeypress="checkEnter(event)">
             <div class="buttons">
                 <button class="login" onclick="login()">Login</button>
-                <button class="signup">Signup</button>
+                <button class="signup" onclick="signup()">Signup</button>
             </div>
         </div>
     </div>
@@ -36,8 +36,12 @@
             if (username === "" || password === "") {
                 alert("Please enter both username and password.");
             } else {
-                window.location.href = "Main Page.html"; // Redirect to the main page
+                window.location.href = "{{ url_for('index') }}"; // Redirect to the main page
             }
+        }
+        
+        function signup() {
+            window.location.href = "{{ url_for('signup') }}";
         }
     </script>
 </body>
