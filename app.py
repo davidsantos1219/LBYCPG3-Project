@@ -57,9 +57,11 @@ def signup():
             cursor.execute('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', (username, email, password))
             conn.commit()
 
-        return "Sign up successful!"
+        # Redirect to login page after successful signup
+        return redirect(url_for('login'))
 
     return render_template('signup.html')
+
 
 @app.route('/add_post', methods=['POST'])
 def add_post():
