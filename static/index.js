@@ -80,7 +80,7 @@ $(document).ready(function() {
 
 
 
-document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('DOMContentLoaded', () => {
     const friendsList = document.getElementById('friends');
     const chatHeader = document.getElementById('chatHeader');
     const chatMessages = document.getElementById('chatMessages');
@@ -94,12 +94,12 @@ document.addEventListener('DOMContentLoaded', () => {
         friend3: []
     };
 
-// Handle friend click
-    friendsList.addEventListener('click', (e) => {
-        if (e.target.tagName === 'LI') {
-            currentChat = e.target.getAttribute('data-friend');
-            chatHeader.textContent = e.target.textContent;
-            loadChatMessages();
+    // Handle friend div click
+    document.body.addEventListener('click', (e) => {
+        if (e.target.closest('div[data-friend]')) {
+            const clickedDiv = e.target.closest('div[data-friend]');
+            currentChat = clickedDiv.getAttribute('data-friend');
+            chatHeader.textContent = clickedDiv.querySelector('h5').textContent;
         }
     });
 
