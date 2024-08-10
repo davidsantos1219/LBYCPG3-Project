@@ -105,3 +105,25 @@ $(document).ready(function() {
 
 
 });
+
+// Get references to the search bar and the posts
+const postSearchBar = document.getElementById('postSearchBar');
+const posts = document.querySelectorAll('.post');
+
+// Function to filter posts based on search input
+const searchPosts = () => {
+    const searchValue = postSearchBar.value.toLowerCase();
+
+    posts.forEach(post => {
+        const postContent = post.textContent.toLowerCase();
+
+        if (postContent.includes(searchValue)) {
+            post.style.display = 'block';
+        } else {
+            post.style.display = 'none';
+        }
+    });
+}
+
+// Listen for input in the search bar
+postSearchBar.addEventListener('keyup', searchPosts);
