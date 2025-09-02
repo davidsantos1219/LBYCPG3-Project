@@ -1,20 +1,13 @@
+<img width="392" height="492" alt="image" src="https://github.com/user-attachments/assets/6679c263-8cbf-43b3-8b62-59b9a762c079" />
 
-Things left to do in this project:
-- create a database/place to store username/password/profilepics/posts/messages/friends list etc.
-- create a functional search bar for people/friends/posts/messages/topics
-- create a sign up feature in the login page
-- create a functional notification tab
-- add a add post feature (with an upload file/photo/txt + description and caption)
-- add more settings in the settings page
-- create a messaging function + notifcation ping or notif banner (done)
-- fix up the profile page so that any changes in username/password/pfp can be saved 
+<img width="403" height="674" alt="image" src="https://github.com/user-attachments/assets/2c597b36-72dc-4401-b1cd-1cbc3fca0385" />
 
+<img width="405" height="679" alt="image" src="https://github.com/user-attachments/assets/9337d99e-740d-4a92-a543-d7b74697bc41" />
 
-walkthrough of program
-![image](https://github.com/user-attachments/assets/9a29617c-e073-4271-8c5d-44e885e60cb5)
-the initial username and password are "username" and "password"
+<img width="406" height="671" alt="image" src="https://github.com/user-attachments/assets/3e4ed2ec-6b52-4e26-bd4c-3fb199704482" />
 
-![image](https://github.com/user-attachments/assets/e4fc348e-56a0-4299-859b-6c46175b7690)
+<img width="408" height="219" alt="image" src="https://github.com/user-attachments/assets/2261f8cc-4b4f-4b5f-863d-9296cfb5912a" />
+
 Navigation Bar:
 1. Profile : contains the change username/password/profile picture feautre
 2. Notification Bar: contains the notifs for posts/messages
